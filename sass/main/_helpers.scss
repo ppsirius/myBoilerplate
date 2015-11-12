@@ -1,0 +1,13 @@
+/* Detect media in javascript */
+.viewports {
+	font-family: mobile;
+	@include breakpoint(small) {
+		font-family: tablet;
+	}
+	@include breakpoint(large) {
+		font-family: desktop;
+	}
+}
+
+
+// @todo align text

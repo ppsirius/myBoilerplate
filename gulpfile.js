@@ -9,7 +9,7 @@ var gulp = require('gulp'),
     reload = browsersync.reload;
 
 gulp.task("sass", function () {
-    gulp.src("src/sass/**/*.scss")
+    gulp.src("sass/**/*.scss")
         .pipe(sourcemaps.init())
         .pipe(sass({
             errLogToConsole: true
@@ -21,12 +21,12 @@ gulp.task("sass", function () {
         .pipe(minifycss())
         // Only if developement mode is on
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest("src/css"))
+        .pipe(gulp.dest("css"))
         .pipe(reload({stream: true}));
 });
 
 gulp.task("watch", function () {
-    gulp.watch("src/sass/**/*.scss", ["sass"]);
+    gulp.watch("sass/**/*.scss", ["sass"]);
 });
 
 gulp.task("serve", ["watch"], function () {
