@@ -1,10 +1,9 @@
 /*
 @todo flexbox
-@todo show and hide element
-@todo elipsis
+
 */
 
-// Breakpoints //
+/* Breakpoints */
 @mixin breakpoint($point) {
 	@if $point == small {
 		@media only screen and (min-width: 768px) {
@@ -29,7 +28,7 @@
 	}
 }
 
-// Clearfix //
+/* Clearfix */
 @mixin clearfix() {
 	&:before,
 	&:after {
@@ -41,7 +40,7 @@
 	}
 }
 
-// Clickable area - $size in px //
+/* Clickable area - $size in px */
 @mixin clickable-area($size) {
 	position: relative;
 	&:after {
@@ -63,24 +62,17 @@
 	}
 }
 
+/* Center transform */
+@mixin transform-center() {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
 
-//// Transform center @todo transform center
-//@mixin center($xy:xy) {
-//  @if $xy == xy {
-//    left: 50%;
-//    top: 50%;
-//    bottom: auto;
-//    right: auto;
-//    @include transform(translateX(-50%) translateY(-50%));
-//  }
-//  @else if $xy == x {
-//    left: 50%;
-//    right: auto;
-//    @include transform(translateX(-50%));
-//  }
-//  @else if $xy == y {
-//    top: 50%;
-//    bottom: auto;
-//    @include transform(translateY(-50%));
-//  }
-//}
+/* Dotted line */
+@mixin ellipsis() {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
