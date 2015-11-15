@@ -1,8 +1,3 @@
-/*
-@todo flexbox
-
-*/
-
 /* Breakpoints */
 @mixin breakpoint($point) {
 	@if $point == small {
@@ -18,7 +13,7 @@
 			@content;
 		}
 	} @else if $point == over-tablet {
-		@media only screen and (min-width: 1100px) {
+		@media only screen and (min-width: 1025px) {
 			@content;
 		}
 	} @else if $point == large {
@@ -26,6 +21,45 @@
 			@content;
 		}
 	}
+}
+
+/* Flexbox */
+@mixin flexbox($justify-content: '', $align-items: '', $flex-wrap: '', $flex-direction: '') {
+	display: flex;
+	// justify-content default value flex-start
+	@if $justify-content == flex-end {
+		justify-content: flex-end;
+	} @else if $justify-content == center {
+		justify-content: center;
+	} @else if $justify-content == space-between {
+		justify-content: space-between;
+	} @else if $justify-content == space-around {
+		justify-content: space-around;
+	} @else {}
+	// align-items default value stretch
+	@if $align-items == flex-start {
+		align-items: flex-start;
+	} @else if $align-items == flex-end {
+		align-items: flex-end;
+	} @else if $align-items == center {
+		align-items: center;
+	} @else if $align-items == baseline {
+		align-items: baseline;
+	} @else {}
+	// flex-wrap default value nowrap
+	@if $flex-wrap == wrap {
+		flex-wrap: wrap;
+	} @else if $flex-wrap == wrap-reverse {
+		flex-wrap: wrap-reverse;
+	} @else {}
+	// flex-direction default value row
+	@if $flex-direction == row-reverse {
+		flex-direction: row-reverse;
+	} @else if $flex-direction == column {
+		flex-direction: column;
+	} @else if $flex-direction == column-reverse {
+		flex-direction: column-reverse;
+	} @else {}
 }
 
 /* Clearfix */
