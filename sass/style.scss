@@ -1,4 +1,4 @@
-// Main //
+/* Main */
 @import "main/reset";
 @import "main/normalize";
 @import "main/variables";
@@ -6,6 +6,7 @@
 @import "main/helpers";
 @import "main/base";
 
-// Components //
+/* Components */
 @import "components/footer";
 @import "components/nav";
+@import "components/buttons";

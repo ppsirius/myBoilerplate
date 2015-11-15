@@ -82,7 +82,7 @@
 	transform: translate(-50%, -50%);
 }
 
-/* Clickable area - $size in px */
+/* Clickable area $size in px */
 @mixin clickable-area($size) {
 	position: relative;
 	&:after {
