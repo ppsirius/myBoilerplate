@@ -1,1 +1,8 @@
-My custom boilerplate base on HTML5 Boilerplate
+My custom boilerplate for new projects.
+
+Includes:
+
+- mixins
+- helpers
+- reset
+- normalize
