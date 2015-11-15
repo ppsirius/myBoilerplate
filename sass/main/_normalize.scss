@@ -422,3 +422,23 @@ td,
 th {
   padding: 0;
 }
+
+
+
+/* Custom
+   ========================================================================== */
+
+/* Box Model */
+* {
+  box-sizing: border-box;
+}
+
+
+/* Delete underlines on hover */
+a {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+}

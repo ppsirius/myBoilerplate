@@ -22,5 +22,33 @@
 	text-align: center;
 }
 
+/* Show and hide element */
+.hide-desktop {
+	@include breakpoint(large) {
+		display: none;
+	}
+}
 
-// @todo show and hide element
+.hide-mobile-tablet {
+	display: none;
+
+	@include breakpoint(large) {
+		display: block;
+
+		&.flex {
+			display: flex;
+		}
+	}
+}
+
+.hide-mobile {
+	display: none;
+
+	@include breakpoint(small) {
+		display: block;
+
+		&.flex {
+			display: flex;
+		}
+	}
+}
