@@ -1,37 +1,104 @@
-'use strict';
+/**
 
-var gulp = require('gulp'),
+ */
+"use strict";
+
+var gulp = require("gulp"),
     sass = require("gulp-sass"),
-    sourcemaps = require("gulp-sourcemaps"),
-    autoprefixer = require("gulp-autoprefixer"),
-    minifycss = require("gulp-minify-css"),
     browsersync = require("browser-sync"),
-    reload = browsersync.reload;
+    sourcemaps = require("gulp-sourcemaps"),
+    supportedBrowsers = "last 2 versions",
+    plumber = require("gulp-plumber"),
+    autoprefixer = require("autoprefixer"),
+    usemin = require('gulp-usemin'),
+    uglify = require('gulp-uglify'),
+    minifyHtml = require('gulp-minify-html'),
+    minifyCss = require('gulp-minify-css'),
+    rev = require('gulp-rev'),
+    gulpPostCss = require("gulp-postcss"),
+    postcssDiscardDuplicates = require("postcss-discard-duplicates"),
+    postcssDiscardEmpty = require("postcss-discard-empty"),
+    postcssRoundSubpixels = require("postcss-round-subpixels"),
+    postcssFlexbugsFixes = require("postcss-flexbugs-fixes"),
+    postcssFocus = require("postcss-focus"),
+    postcssZindex = require("postcss-zindex"),
+    postcssVmin = require("postcss-vmin"),
+    reload = browsersync.reload,
 
-gulp.task("sass", function () {
-    gulp.src("sass/**/*.scss")
-        .pipe(sourcemaps.init())
+    /* Paths */
+    src = 'public/src',
+    dist = 'public/dist',
+    paths = {
+        js: src + '/js/*.js',
+        scss: src + '/scss/*.scss',
+        html: src + '/**/*.html',
+        img: src + '/img/**'
+    };
+
+gulp.task("compile-scss", function () {
+    gulp.src(paths.scss)
+        .pipe(plumber())
         .pipe(sass({
-            errLogToConsole: true
+            "errLogToConsole": true
         }))
-        .pipe(autoprefixer({
-            browsers: ["last 4 versions"],
-            cascade: false
-        }))
-        .pipe(minifycss())
-        // Only if developement mode is on
+        .pipe(gulpPostCss([
+            autoprefixer({
+                "browsers": supportedBrowsers
+            }),
+            postcssDiscardDuplicates,
+            postcssDiscardEmpty,
+            postcssRoundSubpixels,
+            postcssFlexbugsFixes,
+            postcssFocus,
+            postcssZindex,
+            postcssVmin
+        ]))
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest("css"))
-        .pipe(reload({stream: true}));
+        .pipe(plumber.stop())
+        .pipe(gulp.dest(dist + '/css'))
+        .pipe(reload({
+            "stream": true
+        }));
+});
+
+gulp.task('move-html', function () {
+    gulp.src(paths.html)
+        .pipe(gulp.dest(dist + '/'));
+});
+
+gulp.task('compress-html', function () {
+    gulp.src(paths.html)
+        .pipe(minifyHtml())
+        .pipe(gulp.dest(dist + '/'));
+});
+
+gulp.task('move-img', function () {
+    gulp.src(paths.img)
+        .pipe(gulp.dest(dist + '/img/'));
 });
 
 gulp.task("watch", function () {
-    gulp.watch("sass/**/*.scss", ["sass"]);
+    gulp.watch(src + '/scss/**/*.scss', ['compile-scss']);
+    gulp.watch(paths.html, ['move-html']);
+    gulp.watch(paths.img, ['move-img']);
 });
 
 gulp.task("serve", ["watch"], function () {
     browsersync({
-        server: "./"
+        "server": dist
     });
-    gulp.watch("*.html").on("change", reload);
+    gulp.watch(dist + '/**').on("change", reload);
 });
+
+
+
+//gulp.task('usemin', function() {
+//    return gulp.src('/*.html')
+//        .pipe(usemin({
+//            css: [ minifyCss(), 'concat' ],
+//            js: [ uglify() ],
+//            // html: [ minifyHtml({ empty: true }) ]
+//            // js: [ uglify(), rev ]
+//        }))
+//        .pipe(gulp.dest('deploy/'));
+//});
