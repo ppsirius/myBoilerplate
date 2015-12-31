@@ -6,8 +6,17 @@ body {
 	color: $primary-text;
 	font-family: $font-stack;
 	font-size: $base-font-size;
-	-webkit-font-smoothing: subpixel-antialiased;
 	font-weight: 300;
+	line-height: $base-line-height;
+	-webkit-font-smoothing: subpixel-antialiased;
 	overflow-x: hidden;
 	overflow-y: visible;
+}
+
+* {
+	-webkit-user-select: none;
+}
+
+.container {
+	margin: 0 $gutter;
 }

@@ -1,11 +1,10 @@
 /*	email: piotrek@jakbyco.com
 	site: jakbyco.com
 	twitter: @ppsirius
-	version: 0.0.1
+	version: 0.0.2
 */
 
 /* Main */
-@import "main/reset";
 @import "main/normalize";
 @import "main/variables";
 @import "main/mixins";
@@ -13,15 +12,10 @@
 @import "main/base";
 
 /* Components */
-@import "components/footer";
 @import "components/nav";
+@import "components/footer";
 @import "components/buttons";
 
-body {
-	color: red;
-
-
-
-}
+/* Pages */
 
 
