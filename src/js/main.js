@@ -1,23 +1,26 @@
 $(function() {
 
     // CSS media query
+    var className = 'viewports',
+        mediaQuery;
 
-    var mediaQuery = $('.viewports').css('font-family');
-
-    //function isMobile() {
-    //    if(mediaQuery === 'mobile') {
-    //        return true;
-    //    } else {
-    //        return false;
-    //    }
-    //
-    //    return isMobile(mediaQuery === 'mobile');
-    //}
-    //
-    //console.log(isMobile())
+    window.currentDevice = function (device) {
+        if (!mediaQuery) {
+            mediaQuery = $('.' + className);
+            if (!mediaQuery.length) {
+                console.log(mediaQuery)
+                mediaQuery = $('<div></div>').appendTo($('body')).addClass(className);
+            }
+        }
+        var currentQuery = mediaQuery.css('font-family');
+        if (device) {
+            return currentQuery === device;
+        }
+        return device;
+    };
 
     // Media Query for js
-    //if (mediaQuery == 'tablet' || mediaQuery == 'desktop') {
+    //if (currentDevice('mobile') || currentDevice('tablet')) {
     //
     //}
 

@@ -84,3 +84,7 @@
 	::-moz-placeholder          {@content}
 	:-ms-input-placeholder      {@content}
 }
+
+@mixin px-rem($px-font-size) {
+	font-size: ($px-font-size / $base-font) * 1rem;;
+}
