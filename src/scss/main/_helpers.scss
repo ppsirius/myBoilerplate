@@ -1,0 +1,99 @@
+/* Detect media in javascript */
+.viewports {
+
+	font-family: mobile;
+
+	@include breakpoint(small) {
+		font-family: tablet;
+	}
+
+	@include breakpoint(large) {
+		font-family: desktop;
+	}
+}
+
+/* Align text */
+.align-left {
+	text-align: left;
+}
+
+.align-right {
+	text-align: right;
+}
+
+.align-center {
+	text-align: center;
+}
+
+/* Show and hide element */
+.hide-desktop {
+	@include breakpoint(large) {
+		display: none;
+	}
+}
+
+.hide-mobile-tablet {
+	display: none;
+
+	@include breakpoint(large) {
+		display: block;
+	}
+}
+
+.hide-mobile {
+	display: none;
+
+	@include breakpoint(small) {
+		display: block;
+	}
+}
+
+@function parseInt($n) {
+	@return $n / ($n * 0 + 1); /* 2 */
+}
+
+
+@function u($values){ /* 3 */
+
+
+	$list: (); /* 4 */
+
+
+	@each $value in $values { /* 5 */
+
+		@if (type-of($value) == "number") and ($value != 0) { /* 6 */
+
+
+			$unit : unit($value);     /* 7 */
+			$val  : parseInt($value); /* 2 */
+
+
+			@if ($px-only) and ($unit == 'rem') { /* 8 */
+				$list: append($list, ($val * $pixelBase) + px); /* 8 */
+			}
+
+
+			@else if($unit == 'px') or ($unit == 'rem'){ /* 9 */
+				$list: append($list, $value); /* 9 */
+			}
+
+
+			@else {
+				@warn 'There is no unit conversion for "#{$unit}"'; /* 10 */
+			}
+
+
+		}@else {
+			$list: append($list, $value); /* 11 */
+		}
+
+
+	}
+
+
+	@return $list(); /* 12 */
+
+
+}
+
+

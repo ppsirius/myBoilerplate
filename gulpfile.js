@@ -15,6 +15,7 @@ var gulp = require("gulp"),
     minifyHtml = require('gulp-minify-html'),
     minifyCss = require('gulp-minify-css'),
     rev = require('gulp-rev'),
+    replace = require('gulp-replace-task'),
     gulpPostCss = require("gulp-postcss"),
     postcssDiscardDuplicates = require("postcss-discard-duplicates"),
     postcssDiscardEmpty = require("postcss-discard-empty"),
@@ -25,9 +26,9 @@ var gulp = require("gulp"),
     postcssVmin = require("postcss-vmin"),
     reload = browsersync.reload,
 
-    /* Paths */
-    src = 'public/src',
-    dist = 'public/dist',
+/* Paths */
+    src = 'src',
+    dist = 'dist',
     paths = {
         js: src + '/js/*.js',
         scss: src + '/scss/*.scss',

@@ -13,6 +13,7 @@
     "gulp-minify-css": "^1.x",
     "gulp-minify-html": "^1.x",
     "gulp-rev": "^6.x",
+    "gulp-replace-task": "0.x",
     "postcss-discard-duplicates": "2.x",
     "postcss-discard-empty": "2.x",
     "postcss-flexbugs-fixes": "2.x",

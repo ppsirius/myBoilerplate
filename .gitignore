@@ -1,6 +1,6 @@
 archive
 node_modules
-.idea### OSX template
+### OSX template
 .DS_Store
 .AppleDouble
 .LSOverride
@@ -101,4 +101,24 @@ atlassian-ide-plugin.xml
 com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
+### Windows template
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
 
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+.idea
