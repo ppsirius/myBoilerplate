@@ -1,14 +1,29 @@
 /* Detect media in javascript */
-.viewports, .viewports2 {
-
+.viewports {
 	font-family: mobile;
 
-	@include breakpoint(small) {
-		font-family: tablet;
+	@include breakpoint(small-tablet) {
+		font-family: small-tablet;
 	}
 
-	@include breakpoint(large) {
+	@include breakpoint(over-mobile) {
+		font-family: over-mobile;
+	}
+
+	@include breakpoint(small-desktop) {
+		font-family: small-desktop;
+	}
+
+	@include breakpoint(desktop) {
 		font-family: desktop;
+	}
+}
+
+// IE svg size fix
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+	img[src*=".svg"], svg {
+		width: 100%;
+		height: 100%;
 	}
 }
 
@@ -26,8 +41,12 @@
 }
 
 /* Show and hide element */
+.hide {
+	display: none;
+}
+
 .hide-desktop {
-	@include breakpoint(large) {
+	@include breakpoint(desktop) {
 		display: none;
 	}
 }
@@ -35,7 +54,7 @@
 .hide-mobile-tablet {
 	display: none;
 
-	@include breakpoint(large) {
+	@include breakpoint(small-desktop) {
 		display: block;
 	}
 }
@@ -43,57 +62,7 @@
 .hide-mobile {
 	display: none;
 
-	@include breakpoint(small) {
+	@include breakpoint(over-mobile) {
 		display: block;
 	}
 }
-
-@function parseInt($n) {
-	@return $n / ($n * 0 + 1); /* 2 */
-}
-
-
-@function u($values){ /* 3 */
-
-
-	$list: (); /* 4 */
-
-
-	@each $value in $values { /* 5 */
-
-		@if (type-of($value) == "number") and ($value != 0) { /* 6 */
-
-
-			$unit : unit($value);     /* 7 */
-			$val  : parseInt($value); /* 2 */
-
-
-			@if ($px-only) and ($unit == 'rem') { /* 8 */
-				$list: append($list, ($val * $pixelBase) + px); /* 8 */
-			}
-
-
-			@else if($unit == 'px') or ($unit == 'rem'){ /* 9 */
-				$list: append($list, $value); /* 9 */
-			}
-
-
-			@else {
-				@warn 'There is no unit conversion for "#{$unit}"'; /* 10 */
-			}
-
-
-		}@else {
-			$list: append($list, $value); /* 11 */
-		}
-
-
-	}
-
-
-	@return $list(); /* 12 */
-
-
-}
-
-

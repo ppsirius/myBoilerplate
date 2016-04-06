@@ -1,30 +1,21 @@
 /* Breakpoints */
-@mixin breakpoint($point) {
+$breakpoints: (
+	small-tablet: 580,
+	over-mobile: 768,
+	small-desktop: 1024,
+	desktop: 1240
+);
 
-	@if $point == small {
-		@media only screen and (min-width: 768px) {
+@mixin breakpoint($breakpoint) {
+	$value: map-get($breakpoints, $breakpoint);
+
+	@if $value != null {
+		// Convert to em
+		@media (min-width: ($value / $base-font)  * 1em ) {
 			@content;
 		}
-
-	} @else if $point == tablet {
-		@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-			@content;
-		}
-
-	} @else if $point == medium {
-		@media only screen and (min-width: 992px) {
-			@content;
-		}
-
-	} @else if $point == over-tablet {
-		@media only screen and (min-width: 1025px) {
-			@content;
-		}
-
-	} @else if $point == large {
-		@media only screen and (min-width: 1240px) {
-			@content;
-		}
+	} @else {
+		@warn "Can't find breakpoint `#{$breakpoint}`. ";
 	}
 }
 
@@ -62,12 +53,6 @@
 		padding: $size;
 		@include transform-center();
 	}
-
-	//@include breakpoint(large) {
-	//	&:after {
-	//		display: none;
-	//	}
-	//}
 }
 
 /* Dotted line */

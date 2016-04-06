@@ -1,6 +1,3 @@
-/**
-
- */
 "use strict";
 
 var gulp = require("gulp"),
@@ -80,8 +77,6 @@ gulp.task("dev", ["watch"], function () {
     });
     gulp.watch(src + '/**').on("change", reload);
 });
-
-
 
 //gulp.task('usemin', function() {
 //    return gulp.src('/*.html')
