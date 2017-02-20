@@ -4,15 +4,9 @@ var gulp = require("gulp"),
     sass = require("gulp-sass"),
     browsersync = require("browser-sync"),
     sourcemaps = require("gulp-sourcemaps"),
-    supportedBrowsers = "last 2 versions",
+    supportedBrowsers = "last 4 versions",
     plumber = require("gulp-plumber"),
     autoprefixer = require("autoprefixer"),
-    usemin = require('gulp-usemin'),
-    uglify = require('gulp-uglify'),
-    minifyHtml = require('gulp-minify-html'),
-    minifyCss = require('gulp-minify-css'),
-    rev = require('gulp-rev'),
-    replace = require('gulp-replace-task'),
     gulpPostCss = require("gulp-postcss"),
     postcssDiscardDuplicates = require("postcss-discard-duplicates"),
     postcssDiscardEmpty = require("postcss-discard-empty"),
@@ -21,6 +15,7 @@ var gulp = require("gulp"),
     postcssFocus = require("postcss-focus"),
     postcssZindex = require("postcss-zindex"),
     postcssVmin = require("postcss-vmin"),
+    run = require('gulp-run'),
     reload = browsersync.reload,
 
 /* Paths */
@@ -53,7 +48,7 @@ gulp.task("compile-scss", function () {
         ]))
         .pipe(sourcemaps.write())
         .pipe(plumber.stop())
-        .pipe(gulp.dest(src + '/css'))
+        .pipe(gulp.dest(dist + '/css'))
         .pipe(reload({
             "stream": true
         }));
@@ -66,25 +61,20 @@ gulp.task('move-img', function () {
 });
 
 gulp.task("watch", function () {
-    gulp.watch(src + '/scss/**/*.scss', ['compile-scss']);
-
-    //gulp.watch(paths.img, ['move-img']);
+    gulp.watch(src + '/scss/**/*.scss', ['compile-scss', 'move-img']);
 });
+
+gulp.task("webpack", function () {
+    return run('npm webpack').exec()    // prints "Hello World\n".
+        .pipe(gulp.dest('output'))      // writes "Hello World\n" to output/echo.
+        ;
+});
+
 
 gulp.task("dev", ["watch"], function () {
     browsersync({
-        "server": src
+        "server": dist
     });
     gulp.watch(src + '/**').on("change", reload);
 });
 
-//gulp.task('usemin', function() {
-//    return gulp.src('/*.html')
-//        .pipe(usemin({
-//            css: [ minifyCss(), 'concat' ],
-//            js: [ uglify() ],
-//            // html: [ minifyHtml({ empty: true }) ]
-//            // js: [ uglify(), rev ]
-//        }))
-//        .pipe(gulp.dest('deploy/'));
-//});
