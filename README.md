@@ -1,8 +1,9 @@
-My custom boilerplate for new projects.
+####My custom boilerplate for new projects.
 
-Includes:
+What’s Inside?
 
-- mixins
-- helpers
-- reset
-- normalize
+- Webpack 2
+- Babel with ES6 support
+- Gulp for building project
+- Autoprefixer for CSS 
+- SCSS structure with normalize
