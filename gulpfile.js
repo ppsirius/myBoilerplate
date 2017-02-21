@@ -2,7 +2,6 @@
 
 var gulp = require("gulp"),
     sass = require("gulp-sass"),
-    browsersync = require("browser-sync"),
     sourcemaps = require("gulp-sourcemaps"),
     supportedBrowsers = "last 4 versions",
     plumber = require("gulp-plumber"),
@@ -15,21 +14,15 @@ var gulp = require("gulp"),
     postcssFocus = require("postcss-focus"),
     postcssZindex = require("postcss-zindex"),
     postcssVmin = require("postcss-vmin"),
-    run = require('gulp-run'),
+    webpackStream = require('webpack-stream'),
+    browsersync = require("browser-sync"),
     reload = browsersync.reload,
-
-/* Paths */
+    // Paths
     src = 'src',
-    dist = 'dist',
-    paths = {
-        js: src + '/js/*.js',
-        scss: src + '/scss/*.scss',
-        html: src + '/**/*.html',
-        img: src + '/img/**'
-    };
+    dist = 'dist';
 
-gulp.task("compile-scss", function () {
-    gulp.src(paths.scss)
+gulp.task("sass", function () {
+    gulp.src(src + '/scss/*.scss')
         .pipe(plumber())
         .pipe(sass({
             "errLogToConsole": true
@@ -54,27 +47,25 @@ gulp.task("compile-scss", function () {
         }));
 });
 
+gulp.task('webpack', function() {
+    gulp.src('src/js/main.entry.js')
+        .pipe(webpackStream( require('./webpack.config.js') ))
+        .pipe(gulp.dest('dist/js'));
+});
 
-gulp.task('move-img', function () {
-    gulp.src(paths.img)
-        .pipe(gulp.dest(dist + '/img/'));
+gulp.task('copy-files', function () {
+    gulp.src([src + '/**', '!src/scss{,/**}', '!src/js{,/**}'])
+        .pipe(gulp.dest(dist));
 });
 
 gulp.task("watch", function () {
-    gulp.watch(src + '/scss/**/*.scss', ['compile-scss', 'move-img']);
+    gulp.watch(src + '/**', ['webpack', 'sass', 'copy-files']);
 });
-
-gulp.task("webpack", function () {
-    return run('npm webpack').exec()    // prints "Hello World\n".
-        .pipe(gulp.dest('output'))      // writes "Hello World\n" to output/echo.
-        ;
-});
-
 
 gulp.task("dev", ["watch"], function () {
+    gulp.watch(dist + '/**').on("change", reload);
     browsersync({
         "server": dist
     });
-    gulp.watch(src + '/**').on("change", reload);
 });
 

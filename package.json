@@ -23,10 +23,8 @@
     "gulp-postcss": "6.x",
     "gulp-replace-task": "0.x",
     "gulp-rev": "^6.x",
-    "gulp-run": "^1.7.1",
     "gulp-sass": "2.1",
     "gulp-sourcemaps": "1.x",
-    "gulp-webpack": "^1.5.0",
     "postcss-discard-duplicates": "2.x",
     "postcss-discard-empty": "2.x",
     "postcss-flexbugs-fixes": "2.x",
@@ -36,6 +34,7 @@
     "postcss-style-guide": "0.x",
     "postcss-vmin": "2.x",
     "postcss-zindex": "2.x",
-    "webpack": "^2.2.1"
+    "webpack": "^2.2.1",
+    "webpack-stream": "^3.2.0"
   }
 }
