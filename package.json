@@ -1,40 +1,37 @@
 {
   "author": "Piotr Pupczyk <piotrek@jakbyco.com>",
   "name": "myBoilerplate",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/ppsirius/myBoilerplate.git"
   },
   "scripts": {
-    "webpack": "webpack --watch"
+    "clear": "rimraf dist/",
+    "build": "npm run clear && webpack",
+    "build-prod": "npm run clear && cross-env NODE_ENV=production webpack -p",
+    "watch": "npm run build -- --watch",
+    "server-dev": "webpack-dev-server --open",
+    "server-prod": "cross-env NODE_ENV=production webpack-dev-server -p --open"
   },
   "devDependencies": {
-    "autoprefixer": "6.x",
-    "babel-core": "^6.23.1",
-    "babel-loader": "^6.3.2",
-    "babel-preset-es2015": "^6.22.0",
-    "browser-sync": "2.x",
-    "gulp": "^3.9.0",
-    "gulp-minify-css": "^1.x",
-    "gulp-minify-html": "^1.x",
-    "gulp-plumber": "1.x",
-    "gulp-postcss": "6.x",
-    "gulp-replace-task": "0.x",
-    "gulp-rev": "^6.x",
-    "gulp-sass": "2.1",
-    "gulp-sourcemaps": "1.x",
-    "postcss-discard-duplicates": "2.x",
-    "postcss-discard-empty": "2.x",
-    "postcss-flexbugs-fixes": "2.x",
-    "postcss-focus": "1.x",
-    "postcss-opacity": "3.x",
-    "postcss-round-subpixels": "1.x",
-    "postcss-style-guide": "0.x",
-    "postcss-vmin": "2.x",
-    "postcss-zindex": "2.x",
-    "webpack": "^2.2.1",
-    "webpack-stream": "^3.2.0"
-  }
+    "autoprefixer": "^7.1.2",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "copy-webpack-plugin": "^4.0.1",
+    "cross-env": "^5.0.5",
+    "css-loader": "^0.28.5",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "node-sass": "^4.5.3",
+    "postcss-loader": "^2.0.6",
+    "rimraf": "^2.6.1",
+    "sass-loader": "^6.0.6",
+    "webpack": "^3.5.5",
+    "webpack-dev-server": "^2.7.1"
+  },
+  "browserslist": [
+    "last 8 versions"
+  ]
 }

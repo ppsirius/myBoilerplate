@@ -1,2 +1,4 @@
-console.log('fdsfffd');
+import '../scss/main.scss';
+
+console.log('fdsffssfd');
 
